@@ -1,0 +1,18 @@
+/* src/index.css */
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Opcional: Estilos que você quer que sejam globais */
+#root {
+  min-height: 100vh;
+}
