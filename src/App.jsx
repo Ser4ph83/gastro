@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './App.module.css';
 import { Home as HomeIcon, LayoutDashboard, FileText, Image, BookOpen, Utensils, Handshake } from 'lucide-react';
+import HigieneSaudePage from './HigieneSaudePage.jsx'; // Importe o componente da página de Higiene e Saúde
 // importe das imagens (substitua pelos caminhos corretos ou URLs)//
 import slide1_img from './assets/img1-btn1.png';
 
@@ -90,7 +91,7 @@ function App() {
   const Footer = () => (
     <footer className={styles.footer}>
       <p>&copy; {new Date().getFullYear()} GastroNet. Todos os direitos reservados.</p>
-      <p>Versão 1.0.0</p>
+      <p>Versão 1.8.0</p>
     </footer>
   );
 
@@ -124,6 +125,8 @@ function App() {
         return <HomePageContent />;
       case 'boas-praticas':
         return <BoasPraticasPage />;
+      case 'higiene-saude':
+        return <HigieneSaudePage />;
       default:
         return <HomePageContent />;
     }

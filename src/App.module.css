@@ -237,3 +237,169 @@
   border-radius: 50%; /* Para deixá-las circulares, se preferir */
   margin-bottom: 0.5rem;
 }
+
+---
+/* Estilos para a tela interativa do POP 2 */
+.interactiveImageContainer {
+  position: relative;
+  width: 100%;
+  max-width: 400px; /* Garante que o contêiner não seja maior que a imagem */
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mainImage {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hotspot {
+  position: absolute;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-color: var(--primary-btn-color);
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  animation: pulse 1.5s infinite;
+  transform: translate(-50%, -50%); /* Centraliza o círculo no ponto */
+  transition: transform 0.3s ease;
+}
+
+.hotspot:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* O balão de texto (tooltip) */
+.hotspotTooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 125%; /* Aparece acima do hotspot */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  min-width: 250px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.hotspot:hover .hotspotTooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.hotspotTooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+/* O texto do balão */
+.hotspotTooltip p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* A label que aparece no hover */
+.hotspotLabel {
+  visibility: hidden;
+  position: absolute;
+  top: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--header-color);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.hotspot:hover .hotspotLabel {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Animação de pulsação */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 152, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 152, 0, 0);
+  }
+}
+
+/* Container que irá encapsular a imagem e os hotspots */
+.interactiveImageWrapper {
+  position: relative; /* O ponto de referência para os hotspots */
+  width: 100%;
+  max-width: 900px; /* Mesma largura da sua imagem original */
+  margin: 0 auto;
+}
+
+/* O estilo da imagem dentro do novo container */
+.interactiveImage {
+  width: 100%;
+  height: auto;
+  display: block; /* Para evitar espaçamento extra */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* O estilo dos hotspots que dependem da imagem */
+.hotspot {
+  position: absolute;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-color: var(--primary-btn-color);
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  animation: pulse 1.5s infinite;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease;
+  z-index: 1; /* Adicionado: z-index base para todos os hotspots */
+}
+
+.hotspot:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  z-index: 10; /* Adicionado: z-index maior no hover para sobrepor os outros */
+}
+
+/* O balão de texto (tooltip) */
+.hotspotTooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 125%; /* Aparece acima do hotspot */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  min-width: 250px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 10; /* Adicionado: Garante que o tooltip fique acima de tudo */
+}
