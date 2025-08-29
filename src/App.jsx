@@ -1,99 +1,47 @@
 import React, { useState } from 'react';
 import styles from './App.module.css';
-import { Home as HomeIcon, LayoutDashboard, FileText, Image, BookOpen, Utensils, Handshake } from 'lucide-react';
-import HigieneSaudePage from './HigieneSaudePage.jsx'; // Importe o componente da página de Higiene e Saúde
-// importe das imagens (substitua pelos caminhos corretos ou URLs)//
-import slide1_img from './assets/img1-btn1.png';
+import { Home as HomeIcon, Utensils, Droplet, Hand, Wrench, AlertTriangle, Box, Package, ClipboardList } from 'lucide-react';
 
-// Dados dos botões para os 6 POPs
+import HigieneInstalacoesPage from './HigieneInstalacoesPage.jsx';
+import HigieneSaudePage from './HigieneSaudePage.jsx';
+import ControleAguaPage from './ControleAguaPage.jsx';
+import ManejoResiduosPage from './ManejoResiduosPage.jsx';
+import ManutencaoPage from './ManutencaoPage.jsx';
+import PragasPage from './PragasPage.jsx';
+import SelecaoPage from './SelecaoPage.jsx';
+import RecolhimentoPage from './RecolhimentoPage.jsx';
+
+// Dados dos botões para os 8 POPs, conforme o documento
 const popsData = [
-  { icon: <BookOpen size={48} />, title: "POP 1: Boas Práticas de Fabricação", description: "Procedimentos de higiene e manipulação.", colorClass: styles.popsBtnGreen, page: 'boas-praticas', image: null },
-  { icon: <FileText size={48} />, title: "POP 2: Higiene e Saúde do Manipulador", description: "Higiene pessoal e exames médicos.", colorClass: styles.popsBtnGreen, page: 'higiene-saude', image: null },
-  { icon: <Utensils size={48} />, title: "POP 3: Higienização de Utensílios e Equipamentos", description: "Procedimentos de limpeza da cozinha.", colorClass: styles.popsBtnGreen, page: 'higienizacao', image: null },
-  { icon: <Image size={48} />, title: "POP 4: Controle de Pragas", description: "Prevenção e controle de animais.", colorClass: styles.popsBtnGreen, page: 'controle-pragas', image: null },
-  { icon: <Handshake size={48} />, title: "POP 5: Coleta de Amostras", description: "Como coletar e armazenar amostras.", colorClass: styles.popsBtnGreen, page: 'coleta-amostras', image: null },
-  { icon: <LayoutDashboard size={48} />, title: "POP 6: Manutenção Preventiva", description: "Checklists para equipamentos.", colorClass: styles.popsBtnGreen, page: 'manutencao-preventiva', image: null },
+  { icon: <Utensils size={48} />, title: "POP 1: Higiene de Instalações, Equipamentos, Móveis e Utensílios", description: "Limpeza, desinfecção e manutenção de ambientes e ferramentas.", colorClass: styles.popsBtnGreen, page: 'pop1-higiene' },
+  { icon: <Droplet size={48} />, title: "POP 2: Controle da Potabilidade da Água", description: "Garantir a qualidade da água para consumo e preparo.", colorClass: styles.popsBtnGreen, page: 'pop2-agua', image: null },
+  { icon: <Hand size={48} />, title: "POP 3: Higiene e Saúde dos Manipuladores", description: "Hábitos de higiene e saúde pessoal no trabalho.", colorClass: styles.popsBtnGreen, page: 'pop3-higiene-manipuladores', image: null },
+  { icon: <Box size={48} />, title: "POP 4: Manejo de Resíduos", description: "Coleta, separação e descarte correto do lixo.", colorClass: styles.popsBtnGreen, page: 'pop4-residuos', image: null },
+  { icon: <Wrench size={48} />, title: "POP 5: Manutenção Preventiva e Calibração de Equipamentos", description: "Garantir funcionamento, segurança e precisão dos equipamentos.", colorClass: styles.popsBtnGreen, page: 'pop5-manutencao', image: null }, // Corrigido
+  { icon: <AlertTriangle size={48} />, title: "POP 6: Controle Integrado de Vetores e Pragas Urbanas", description: "Prevenir e controlar insetos e roedores no ambiente.", colorClass: styles.popsBtnGreen, page: 'pop6-pragas', image: null }, // Corrigido
+  { icon: <Package size={48} />, title: "POP 7: Seleção de Matérias-Primas, Ingredientes e Embalagens", description: "Critérios de escolha e recebimento de insumos seguros.", colorClass: styles.popsBtnGreen, page: 'pop7-selecao', image: null }, // Adicionado
+  { icon: <ClipboardList size={48} />, title: "POP 8: Programa de Recolhimento de Alimentos", description: "Retirar do mercado produtos com risco à saúde do consumidor.", colorClass: styles.popsBtnGreen, page: 'pop8-recolhimento', image: null }, // Adicionado
 ];
 
-// Dados para o POP 1: Boas Práticas de Fabricação
-const boasPraticasData = [
-  {
-    title: "1. Condições e Ambiente",
-    text: "O ambiente de trabalho deve ser limpo e organizado. O piso, as paredes e o teto devem ser lisos, impermeáveis e fáceis de limpar. Mantenha as lixeiras sempre fechadas e em bom estado de conservação.",
-    image: slide1_img,
-  },
-  {
-    title: "2. Higienização das Mãos",
-    text: "Lave as mãos frequentemente com água e sabão. Use papel toalha para secar as mãos e fechar a torneira, evitando contaminação cruzada. Use álcool 70% após a lavagem para uma desinfecção completa.",
-    image: null,
-  },
-  {
-    title: "3. Uso de EPIs",
-    text: "Use equipamentos de proteção individual (EPIs) limpos, como toucas, luvas, máscaras e aventais. Isso protege tanto o alimento quanto o manipulador, prevenindo contaminações.",
-    image: null,
-  },
-];
+const Header = ({ onHomeClick }) => (
+  <header className={styles.header}>
+    <h1 className={styles.title}>GastroNet</h1>
+    <button onClick={onHomeClick} className={styles.homeBtn}>
+      <HomeIcon size={20} />
+      <span>Página Inicial</span>
+    </button>
+  </header>
+);
 
-// Componente para a página de Boas Práticas de Fabricação
-const BoasPraticasPage = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+const Footer = () => (
+  <footer className={styles.footer}>
+    <p>© 2025 GastroNet. Todos os direitos reservados.</p>
+    <p>Versão 1.0.0</p>
+  </footer>
+);
 
-  const handleNextSlide = () => {
-    if (currentSlide < boasPraticasData.length - 1) {
-      setCurrentSlide(currentSlide + 1);
-    }
-  };
-
-  const handlePreviousSlide = () => {
-    if (currentSlide > 0) {
-      setCurrentSlide(currentSlide - 1);
-    }
-  };
-
-  const slide = boasPraticasData[currentSlide];
-
-  return (
-    <main className={styles.slideContentContainer}>
-      <h2 className={styles.pageTitle}>POP 1: Boas Práticas de Fabricação</h2>
-      <div key={currentSlide} className={styles.slideCard}>
-        {slide.image ? <img src={slide.image} alt={slide.title} className={styles.slideImage} /> : <div className={styles.icon}><Image size={48} /></div>}
-        <h3>{slide.title}</h3>
-        <p>{slide.text}</p>
-      </div>
-
-      <div className={styles.navigation}>
-        <button onClick={handlePreviousSlide} disabled={currentSlide === 0}>
-          Anterior
-        </button>
-        <span>{currentSlide + 1} / {boasPraticasData.length}</span>
-        <button onClick={handleNextSlide} disabled={currentSlide === boasPraticasData.length - 1}>
-          Próximo
-        </button>
-      </div>
-    </main>
-  );
-};
-
-// Componente principal da aplicação
-function App() {
+const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
-
-  const Header = () => (
-    <header className={styles.header}>
-      <h1 className={styles.title}>GastroNet</h1>
-      <button onClick={() => setCurrentPage('home')} className={styles.homeBtn}>
-        <HomeIcon size={20} />
-        <span>Início</span>
-      </button>
-    </header>
-  );
-
-  const Footer = () => (
-    <footer className={styles.footer}>
-      <p>&copy; {new Date().getFullYear()} GastroNet. Todos os direitos reservados.</p>
-      <p>Versão 1.8.0</p>
-    </footer>
-  );
 
   const HomePageContent = () => (
     <main className={styles.mainContent}>
@@ -120,25 +68,37 @@ function App() {
   );
 
   const renderPageContent = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomePageContent />;
-      case 'boas-praticas':
-        return <BoasPraticasPage />;
-      case 'higiene-saude':
-        return <HigieneSaudePage />;
-      default:
-        return <HomePageContent />;
-    }
-  };
+  switch (currentPage) {
+    case 'home':
+      return <HomePageContent />;
+    case 'pop1-higiene':
+      return <HigieneInstalacoesPage />;
+    case 'pop2-agua':
+      return <ControleAguaPage />;
+    case 'pop3-higiene-manipuladores':
+      return <HigieneSaudePage />;
+    case 'pop4-residuos':
+      return <ManejoResiduosPage />;
+    case 'pop5-manutencao':
+      return <ManutencaoPage />; // Novo!
+    case 'pop6-pragas':
+      return <PragasPage />; // Novo!
+    case 'pop7-selecao':
+      return <SelecaoPage />; // Novo!
+    case 'pop8-recolhimento':
+      return <RecolhimentoPage />; // Novo!
+    default:
+      return <HomePageContent />;
+  }
+};
 
   return (
     <div className={styles.appContainer}>
-      <Header />
+      <Header onHomeClick={() => setCurrentPage('home')} />
       {renderPageContent()}
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

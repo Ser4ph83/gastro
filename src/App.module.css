@@ -73,6 +73,7 @@
   font-size: 2.0rem;
   font-weight: 800;
   margin-bottom: 0.3rem;
+  text-align: center; /* Adicionado: Garante que o título da página seja centralizado */
 }
 
 .introText {
@@ -158,15 +159,13 @@
 .slideCard {
   background-color: #fff;
   border-radius: 8px;
-  /* Adicionei uma borda para que o card seja visível */
-  border: 1px solid #ddd; 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Aumentei a sombra para ser mais perceptível */
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   padding: 2rem;
   margin-bottom: 2rem;
   text-align: center;
   width: 100%;
   max-width: 900px;
-  /* Transição para o efeito suave */
   transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
@@ -234,23 +233,22 @@
   width: 48px;
   height: 48px;
   object-fit: cover;
-  border-radius: 50%; /* Para deixá-las circulares, se preferir */
+  border-radius: 50%;
   margin-bottom: 0.5rem;
 }
 
----
 /* Estilos para a tela interativa do POP 2 */
 .interactiveImageContainer {
   position: relative;
   width: 100%;
-  max-width: 400px; /* Garante que o contêiner não seja maior que a imagem */
+  max-width: 400px;
   margin: 0 auto;
   text-align: center;
 }
 
 .mainImage {
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -266,8 +264,9 @@
   border: 2px solid #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   animation: pulse 1.5s infinite;
-  transform: translate(-50%, -50%); /* Centraliza o círculo no ponto */
+  transform: translate(-50%, -50%);
   transition: transform 0.3s ease;
+  z-index: 1;
 }
 
 .hotspot:hover {
@@ -278,7 +277,7 @@
 .hotspotTooltip {
   visibility: hidden;
   position: absolute;
-  bottom: 125%; /* Aparece acima do hotspot */
+  bottom: 125%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #333;
@@ -338,7 +337,7 @@
 /* Animação de pulsação */
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.7);
+    box-shadow: 0 0 0 0 rgba(196, 238, 9, 0.7);
   }
   70% {
     box-shadow: 0 0 0 10px rgba(255, 152, 0, 0);
@@ -350,9 +349,9 @@
 
 /* Container que irá encapsular a imagem e os hotspots */
 .interactiveImageWrapper {
-  position: relative; /* O ponto de referência para os hotspots */
+  position: relative;
   width: 100%;
-  max-width: 900px; /* Mesma largura da sua imagem original */
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -360,12 +359,97 @@
 .interactiveImage {
   width: 100%;
   height: auto;
-  display: block; /* Para evitar espaçamento extra */
+  display: block;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* O estilo dos hotspots que dependem da imagem */
+.hotspot {
+  position: absolute;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background-color: var(--primary-btn-color);
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  animation: pulse 1.5s infinite;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.hotspot:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  z-index: 10;
+}
+
+/* O balão de texto (tooltip) */
+.hotspotTooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  min-width: 250px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 10;
+}
+.hotspotTooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+/* Texto explicativo */
+.hotspotTextContainer {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+  /* Centraliza o bloco na página */
+  margin-left: auto;
+  margin-right: auto;
+}
+.hotspotTitle {
+  color: var(--header-color);
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  /* Centraliza o título dentro do bloco */
+  text-align: center;
+}
+
+.hotspotText {
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.5;
+  /* Garante que o texto de descrição fique à esquerda */
+  text-align: left;
+}
+
+.hotspotParagraph {
+  margin: 0.5rem 0;
+  /* Garante o alinhamento à esquerda, mesmo com o container centralizado */
+  text-align: left;
+}
+
+/* O círculo interativo */
 .hotspot {
   position: absolute;
   cursor: pointer;
@@ -378,28 +462,41 @@
   animation: pulse 1.5s infinite;
   transform: translate(-50%, -50%);
   transition: transform 0.3s ease;
-  z-index: 1; /* Adicionado: z-index base para todos os hotspots */
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.hotspot:hover {
-  transform: translate(-50%, -50%) scale(1.2);
-  z-index: 10; /* Adicionado: z-index maior no hover para sobrepor os outros */
-}
-
-/* O balão de texto (tooltip) */
-.hotspotTooltip {
-  visibility: hidden;
-  position: absolute;
-  bottom: 125%; /* Aparece acima do hotspot */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
+/* O número dentro do círculo */
+.hotspotNumber {
   color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 10px;
-  min-width: 250px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  z-index: 10; /* Adicionado: Garante que o tooltip fique acima de tudo */
+  font-weight: bold;
+  font-size: 1rem;
+  z-index: 2;
+}
+
+/* Estilo para remover a rolagem e garantir que o conteúdo caiba na tela */
+.interactiveImageWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Remove a rolagem desnecessária ao reduzir o espaçamento vertical */
+.slideContentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem; /* Reduzido */
+  margin-top: 0; /* Adicionado: Remove margem superior */
+}
+
+/* Remove a rolagem extra no corpo do app */
+.appContainer {
+  /* ... outras propriedades ... */
+  min-height: 100vh;
+  /* Remova esta linha se existir no seu código, pois pode causar problemas: */
+  /* transform: scale(0.9); */
 }
