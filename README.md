@@ -1,12 +1,41 @@
-# React + Vite
+# GastroNet: Plataforma Interativa para Boas Práticas Gastronômicas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Sobre o Projeto
 
-Currently, two official plugins are available:
+O **GastroNet** é uma plataforma digital desenvolvida para auxiliar estabelecimentos do setor de alimentos e bebidas na aplicação das normas de segurança alimentar e boas práticas na cozinha. Este projeto foi concebido como uma solução interativa, transformando os **Procedimentos Operacionais Padronizados (POPs)** em um guia prático e acessível.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A aplicação web conta com 8 módulos, cada um dedicado a um POP específico, utilizando elementos visuais e texto claro para facilitar o aprendizado e a consulta.
 
-## Expanding the ESLint configuration
+## Funcionalidades
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Navegação Simples:** Uma página inicial com botões para acessar cada um dos 8 POPs.
+- **Conteúdo Interativo:** Módulos com infográficos, slides e descrições detalhadas.
+- **Responsividade:** O layout se adapta a diferentes tamanhos de tela, de desktops a dispositivos móveis.
+- **Acesso Público:** Hospedado no GitHub Pages para fácil acesso a todos os interessados.
+
+## Tecnologias Utilizadas
+
+O projeto foi desenvolvido com as seguintes tecnologias:
+
+- **React:** Uma biblioteca JavaScript para a criação de interfaces de usuário dinâmicas.
+- **Vite:** Uma ferramenta de build para projetos web modernos, otimizando o desenvolvimento e a compilação.
+- **CSS Modules:** Para modularizar os estilos e evitar conflitos.
+
+## Como Executar Localmente
+
+Se você deseja rodar o projeto em sua máquina local para desenvolvimento ou teste, siga estes passos:
+
+1.  Clone o repositório:
+    `git clone https://github.com/Ser4ph83/gastro.git`
+2.  Navegue até o diretório do projeto:
+    `cd gastro`
+3.  Instale as dependências:
+    `npm install`
+4.  Inicie o servidor de desenvolvimento:
+    `npm run dev`
+
+A aplicação estará disponível em `http://localhost:5173/`.
+
+## Status do Projeto
+
+O projeto está **concluído** e a aplicação está no ar, pronta para ser utilizada. O objetivo de criar uma ferramenta digital para auxiliar na segurança alimentar foi atingido com sucesso.
