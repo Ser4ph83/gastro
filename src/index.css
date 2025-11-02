@@ -1,10 +1,24 @@
-/* src/index.css */
+/* index.css */
+
+/* --- RESET BÁSICO --- */
+:root {
+  --primary-color: #2a9d8f; /* Cor primária - um verde água */
+  --secondary-color: #e9c46a; /* Cor secundária - um amarelo mostarda */
+  --accent-color: #e76f51; /* Cor de destaque - um coral */
+  --text-color: #333333;
+  --bg-color: #f4f4f9;
+  --card-bg: #ffffff;
+}
 
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 code {
@@ -12,7 +26,91 @@ code {
     monospace;
 }
 
-/* Opcional: Estilos que você quer que sejam globais */
-#root {
-  min-height: 100vh;
+/* --- ESTILOS GLOBAIS DE HOTSPOT (NECESSÁRIOS PARA A INTERAÇÃO) --- */
+
+/* Wrapper da Imagem Interativa */
+.interactiveImageWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.interactiveImage {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Hotspot (Ponto Clicável) */
+.hotspot {
+    position: absolute;
+    width: 30px; 
+    height: 30px; 
+    background-color: var(--accent-color); /* Cor do círculo */
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--card-bg); /* Cor do número dentro do círculo */
+    font-weight: bold;
+    font-size: 16px;
+    border: 3px solid var(--card-bg); /* Borda branca para destaque */
+    transition: transform 0.2s, box-shadow 0.2s;
+    transform: translate(-50%, -50%); /* Centraliza o ponto com base em top/left */
+}
+
+.hotspot:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 15px rgba(231, 111, 81, 0.8); /* Efeito de brilho */
+    z-index: 10;
+}
+
+/* Contêiner de Texto do Hotspot (Balão de Conteúdo) */
+.hotspotTextContainer {
+    position: fixed; /* Fixado para aparecer sobre tudo */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    z-index: 20; /* Garante que fique acima da imagem */
+    border-top: 5px solid var(--primary-color);
+}
+
+.hotspotTitle {
+    color: var(--primary-color);
+    margin-top: 0;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.hotspotParagraph {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.closeHotspotBtn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+    float: right;
+    transition: background-color 0.2s;
+}
+
+.closeHotspotBtn:hover {
+    background-color: #d15c40; 
 }
