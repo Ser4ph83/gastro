@@ -45,34 +45,34 @@ code {
     display: block;
 }
 
-/* Hotspot (Ponto Clicável) */
+/* Hotspot (Ponto Clicável) - Melhoria no touch target */
 .hotspot {
     position: absolute;
-    width: 30px; 
-    height: 30px; 
-    background-color: var(--accent-color); /* Cor do círculo */
+    width: 35px; /* Aumentado de 30px para melhor touch target */
+    height: 35px; /* Aumentado de 30px para melhor touch target */
+    background-color: var(--accent-color);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--card-bg); /* Cor do número dentro do círculo */
+    color: var(--card-bg);
     font-weight: bold;
-    font-size: 16px;
-    border: 3px solid var(--card-bg); /* Borda branca para destaque */
+    font-size: 18px; /* Aumentado de 16px */
+    border: 3px solid var(--card-bg);
     transition: transform 0.2s, box-shadow 0.2s;
-    transform: translate(-50%, -50%); /* Centraliza o ponto com base em top/left */
+    transform: translate(-50%, -50%);
 }
 
 .hotspot:hover {
     transform: translate(-50%, -50%) scale(1.1);
-    box-shadow: 0 0 15px rgba(231, 111, 81, 0.8); /* Efeito de brilho */
+    box-shadow: 0 0 15px rgba(231, 111, 81, 0.8);
     z-index: 10;
 }
 
 /* Contêiner de Texto do Hotspot (Balão de Conteúdo) */
 .hotspotTextContainer {
-    position: fixed; /* Fixado para aparecer sobre tudo */
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -82,8 +82,9 @@ code {
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     padding: 25px;
-    z-index: 20; /* Garante que fique acima da imagem */
+    z-index: 20;
     border-top: 5px solid var(--primary-color);
+    /* Removido o max-height daqui para que o @media aplique */
 }
 
 .hotspotTitle {
@@ -113,4 +114,36 @@ code {
 
 .closeHotspotBtn:hover {
     background-color: #d15c40; 
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- MELHORIAS DE RESPONSIVIDADE PARA MOBILE (TELAS MENORES QUE 768px) --- */
+/* ---------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    
+    /* Wrapper da Imagem Interativa - Reduz margem para usar melhor o espaço */
+    .interactiveImageWrapper {
+        margin: 10px auto; 
+    }
+
+    /* Contêiner de Texto do Hotspot (Modal) */
+    .hotspotTextContainer {
+        width: 95%; /* Usa mais largura da tela */
+        padding: 20px; /* Pouco menos de padding */
+        
+        /* 🚨 Solução principal: Limita a altura para 90% da tela visível (viewport height) */
+        max-height: 90vh; 
+        
+        /* 🚨 Força a rolagem INTERNA do conteúdo se o texto for muito longo */
+        overflow-y: auto; 
+    }
+
+    /* Botão de Fechar - Aumenta a área de toque e remove o float */
+    .closeHotspotBtn {
+        width: 100%; 
+        float: none; 
+        display: block; /* Garante que ocupe a largura total */
+        margin-top: 20px;
+    }
 }
