@@ -36,7 +36,7 @@ const Header = ({ onHomeClick }) => (
 const Footer = () => (
   <footer className={styles.footer}>
     <p>© 2025 GastroNet. Todos os direitos reservados.</p>
-    <p>Versão 1.0.0</p>
+    <p>Versão 1.8.2</p>
   </footer>
 );
 
